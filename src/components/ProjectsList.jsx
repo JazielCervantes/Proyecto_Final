@@ -55,7 +55,7 @@ export default function ProjectsList() {
       title: 'Portafolio Personal',
       description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto..',
       technologies: ['Astro', 'TailwindCSS', 'React'],
-      githubUrl: 'https://github.com/tu-usuario/chat-realtime',
+      githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
       image: '/images/project6.jpg',
       color: 'from-teal-500 to-cyan-500'
     },
