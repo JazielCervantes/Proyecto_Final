@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.jsx';
+import ProjectsList from '../components/ProjectsList.jsx';
+---
+
+<Layout title="Mis Proyectos | Portafolio">
+  <Navigation client:load />
+  <ProjectsList client:load />
+</Layout>
