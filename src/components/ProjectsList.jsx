@@ -7,19 +7,19 @@ export default function ProjectsList() {
   const projects = [
     {
       id: 1,
-      title: 'Calculadora Virtual',
-      description: 'Proyecto simple de una calculadora virtual donde, como desarrollador, practicas la manipulación del DOM y la gestión de eventos.',
-      technologies: ['JavaScript', 'CSS', 'HTML'],
-      githubUrl: 'https://calculadora-virtual-mu.vercel.app/',
-      image: '/images/project1.jpg',
-      color: 'from-blue-500 to-cyan-500'
+      title: 'Portafolio Personal',
+      description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto..',
+      technologies: ['Astro', 'TailwindCSS', 'React'],
+      githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
+      image: '/images/project6.jpg',
+      color: 'from-teal-500 to-cyan-500'
     },
     {
       id: 2,
-      title: 'Login Page sin Base de Datos',
-      description: 'Proyecto sencillo para manejo de login sin usar base de datos, para posteriormente realizar una solicitud Get y Post a una API pública..',
-      technologies: ['JavaScript', 'CSS', 'HTML'],
-      githubUrl: 'https://github.com/JazielCervantes/Login_sinBD',
+      title: 'Data Dashboard',
+      description: 'Aplicación web fullstack desarrollada con Django (backend) y React (frontend) que permite visualizar datos almacenados en MySQL a través de una API REST...',
+      technologies: ['Python','JavaScript', 'CSS', 'React'],
+      githubUrl: 'https://github.com/JazielCervantes/Data_dashboard',
       image: '/images/project2.jpg',
       color: 'from-green-500 to-emerald-500'
     },
@@ -52,12 +52,12 @@ export default function ProjectsList() {
     },
     {
       id: 6,
-      title: 'Portafolio Personal',
-      description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto..',
-      technologies: ['Astro', 'TailwindCSS', 'React'],
-      githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
-      image: '/images/project6.jpg',
-      color: 'from-teal-500 to-cyan-500'
+      title: 'Calculadora Virtual',
+      description: 'Proyecto simple de una calculadora virtual donde, como desarrollador, practicas la manipulación del DOM y la gestión de eventos.',
+      technologies: ['JavaScript', 'CSS', 'HTML'],
+      githubUrl: 'https://calculadora-virtual-mu.vercel.app/',
+      image: '/images/project1.jpg',
+      color: 'from-blue-500 to-cyan-500'
     },
   ];
 
