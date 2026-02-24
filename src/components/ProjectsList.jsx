@@ -49,7 +49,7 @@ export default function ProjectsList() {
       githubUrl: 'https://github.com/JazielCervantes/Ejercicio_condicionales.git',
       image: '/images/project5.jpg',
       color: 'from-blue-500 to-cyan-500'
-    }
+    },
     {
       id: 6,
       title: 'Conexión API pública con diferentes métodos',
