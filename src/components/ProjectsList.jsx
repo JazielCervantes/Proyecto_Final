@@ -7,17 +7,17 @@ export default function ProjectsList() {
   const projects = [
     {
       id: 1,
-      title: 'Portafolio Personal',
-      description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto..',
-      technologies: ['Astro', 'TailwindCSS', 'React'],
+      title: 'Portafolio Personal 👨🏽‍💻',
+      description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto.',
+      technologies: ['Astro', 'Tailwind CSS', 'React'],
       githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
-      image: '/images/project6.jpg',
+      image: '/images/project1.jpg',
       color: 'from-teal-500 to-cyan-500'
     },
     {
       id: 2,
-      title: 'Data Dashboard',
-      description: 'Aplicación web fullstack desarrollada con Django (backend) y React (frontend) que permite visualizar datos almacenados en MySQL a través de una API REST...',
+      title: 'Data Dashboard 📊',
+      description: 'Aplicación web fullstack desarrollada con Django (backend) y React (frontend) que permite visualizar datos almacenados en MySQL a través de una API REST.',
       technologies: ['Python','JavaScript', 'CSS', 'React'],
       githubUrl: 'https://github.com/JazielCervantes/Data_dashboard',
       image: '/images/project2.jpg',
@@ -25,40 +25,58 @@ export default function ProjectsList() {
     },
     {
       id: 3,
-      title: 'Conexión API pública con diferentes métodos',
-      description: 'Introducción práctica al uso de Axios, Fetch y jQuery en la programación web.',
-      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
-      githubUrl: 'https://github.com/JazielCervantes/Ejercicio_semanal_11',
+      title: 'API REST Profesional con JWT + Roles 🚀',
+      description: 'API REST completa con autenticación JWT, sistema de roles, y todas las características de una aplicación profesional.',
+      technologies: ['Astro', 'Python', 'JavaScript', 'HTML', 'Tailwind CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/JWT_API_Proyecto.git',
       image: '/images/project3.jpg',
       color: 'from-purple-500 to-pink-500'
     },
     {
       id: 4,
-      title: 'Conexión API pública usando patrón MVC.',
-      description: 'Proyecto enfocado en el uso del patrón Modelo-Vista-Controlador (MVC) para crear una aplicación web que consulte y muestre información sobre usuarios utilizando la API pública JSONPlaceholder.',
-      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
-      githubUrl: 'https://github.com/JazielCervantes/Caso_practico_modulo6',
-      image: '/images/project4.jpg',
-      color: 'from-orange-500 to-red-500'
-    },
-    {
-      id: 5,
       title: 'CRUD',
       description: 'CRUD completo que gestiona información ingresada por el usuario (nombre, teléfono y correo electrónico). Permite crear, almacenar, editar y eliminar utilizando métodos POST, GET, PUT y DELETE mediante procesos almacenados en MySQL.',
       technologies: ['Astro', 'Django', 'Python', 'MySQL'],
       githubUrl: 'https://github.com/JazielCervantes/CRUD_ASTRO_DJANGO_MySQL',
-      image: '/images/project5.jpg',
+      image: '/images/project4.jpg',
       color: 'from-indigo-500 to-purple-500'
     },
     {
+      id: 5,
+      title: 'Sistema de Ticket de Compra 🛒',
+      description: 'Sistema completo de generación de tickets de compra con búsqueda de productos, cálculo de descuentos y carrito de compras.',
+      technologies: ['JavaScript', 'CSS', 'HTML'],
+      githubUrl: 'https://github.com/JazielCervantes/Ejercicio_condicionales.git',
+      image: '/images/project5.jpg',
+      color: 'from-blue-500 to-cyan-500'
+    }
+    {
       id: 6,
+      title: 'Conexión API pública con diferentes métodos',
+      description: 'Introducción práctica al uso de Axios, Fetch y jQuery en la programación web.',
+      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/Ejercicio_semanal_11',
+      image: '/images/project6.jpg',
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      id: 7,
+      title: 'Conexión API pública usando patrón MVC.',
+      description: 'Proyecto enfocado en el uso del patrón Modelo-Vista-Controlador (MVC) para crear una aplicación web que consulte y muestre información sobre usuarios utilizando la API pública JSONPlaceholder.',
+      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/Caso_practico_modulo6',
+      image: '/images/project7.jpg',
+      color: 'from-orange-500 to-red-500'
+    },
+    {
+      id: 8,
       title: 'Calculadora Virtual',
       description: 'Proyecto simple de una calculadora virtual donde, como desarrollador, practicas la manipulación del DOM y la gestión de eventos.',
       technologies: ['JavaScript', 'CSS', 'HTML'],
       githubUrl: 'https://calculadora-virtual-mu.vercel.app/',
-      image: '/images/project1.jpg',
+      image: '/images/project8.jpg',
       color: 'from-blue-500 to-cyan-500'
-    },
+    }
   ];
 
   return (
