@@ -18,7 +18,7 @@ const frameworks = [
   { name: 'ASP.NET', icon: '🌐', color: 'from-black to-gray-800' },
   { name: 'Django', icon: '🎸', color: 'from-green-600 to-green-800' },
   { name: 'FastAPI', icon: '⚡', color: 'from-teal-500 to-teal-700' },
-  { name: 'jQuery', icon: '🖥️', color: 'from-yellow-400 to-yellow-600' }
+  { name: 'jQuery', icon: '🖥️', color: 'from-yellow-100 to-yellow-400' }
 ];
 
 function SkillCard({ skill, index }) {
