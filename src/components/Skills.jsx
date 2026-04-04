@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 const languages = [
   { name: 'JavaScript', icon: '⚡', color: 'from-yellow-400 to-yellow-600' },
+  { name: 'TypeScript', icon: '🟦', color: 'from-red-400 to-blue-600' },
   { name: 'HTML5', icon: '🌐', color: 'from-orange-400 to-orange-600' },
+  { name: 'C#', icon: '#️⃣', color: 'from-blue-100 to-blue-300' },
   { name: 'CSS3', icon: '🎨', color: 'from-blue-400 to-blue-600' },
   { name: 'Python', icon: '🐍', color: 'from-green-400 to-green-600' },
   { name: 'SQL / MySQL', icon: '🐬', color: 'from-yellow-400 to-yellow-600' },
@@ -13,6 +15,7 @@ const frameworks = [
   { name: 'React.js', icon: '⚛️', color: 'from-cyan-400 to-cyan-600' },
   { name: 'Vue.js', icon: '💚', color: 'from-emerald-400 to-emerald-600' },
   { name: 'Tailwind CSS', icon: '🎯', color: 'from-teal-400 to-teal-600' },
+  { name: 'ASP.NET', icon: '🌐', color: 'from-black to-gray-800' },
   { name: 'Django', icon: '🎸', color: 'from-green-600 to-green-800' },
   { name: 'FastAPI', icon: '⚡', color: 'from-teal-500 to-teal-700' },
   { name: 'jQuery', icon: '🖥️', color: 'from-yellow-400 to-yellow-600' }
