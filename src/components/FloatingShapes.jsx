@@ -54,7 +54,18 @@ export default function FloatingShapes() {
               borderRadius: '50%',
               background:   gradient,
               border:       border,
-              backdropFilter: 'blur(40px)',
+              // SIN backdropFilter: las burbujas SON el fondo — aplicar blur a lo que
+              // hay detrás de ellas (otras burbujas) hace que el GPU invalide capas
+              // en cada frame cuando se superponen → parpadeo/glitch visible.
+
+              // willChange: 'transform' → le dice al browser desde el inicio que este
+              // elemento va a animarse, así lo promueve a su propia capa GPU y nunca
+              // necesita hacer layer promotion/demotion dinámico (que es lo que causa flashes).
+              willChange: 'transform',
+
+              // translateZ(0) refuerza la promoción a capa GPU en browsers más antiguos.
+              transform: 'translateZ(0)',
+
               // animación: nombre de variante + duración + retraso + loop infinito
               animation: `floatShape${animVariant} ${shape.duration}s ease-in-out ${shape.delay}s infinite`,
             }}
