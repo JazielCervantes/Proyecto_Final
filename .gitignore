@@ -1,6 +1,8 @@
 # build output
 dist/
 .output/
+.agents/skills
+.github
 
 # dependencies
 node_modules/

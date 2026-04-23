@@ -1,5 +1,6 @@
 ---
 import '../styles/globals.css';
+import FloatingShapes from '../components/FloatingShapes.jsx';
 
 interface Props {
   title: string;
@@ -21,10 +22,28 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-dark text-white flex flex-col min-h-screen">
 
-  <main class="flex-grow">
+    <!--
+      Script de tema: se ejecuta de forma síncrona ANTES de pintar la página.
+      Esto evita el "flash" (parpadeo blanco → oscuro o viceversa) al cargar.
+      Lee localStorage y aplica la clase "light" al <html> si el usuario
+      eligió el tema claro en una visita anterior.
+    -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      })();
+    </script>
+  </head>
+  <body class="text-white flex flex-col min-h-screen">
+
+  <!-- Burbujas glassmorphic animadas en el fondo (detrás de todo el contenido) -->
+  <FloatingShapes client:load />
+
+  <main class="flex-grow relative z-10">
     <slot />
   </main>
 

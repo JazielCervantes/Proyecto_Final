@@ -1,52 +1,154 @@
-import { useState } from 'react';
+// Skills.jsx
+// Sección de habilidades técnicas del portafolio.
+// Muestra lenguajes de programación y frameworks/librerías
+// con los íconos SVG originales de cada tecnología (via devicons CDN).
+// Soporta cambio de idioma ES/EN.
 
+import { useState, useEffect } from 'react';
+
+// Base URL del CDN de devicons — íconos SVG oficiales de cada tecnología
+// Fuente: https://devicon.dev  (open source, Apache 2.0)
+const ICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
+
+// --- Lenguajes de programación ---
+// Cada entrada tiene: nombre para mostrar, URL del ícono SVG y color del gradiente hover
 const languages = [
-  { name: 'JavaScript', icon: '⚡', color: 'from-yellow-400 to-yellow-600' },
-  { name: 'TypeScript', icon: '🟦', color: 'from-red-400 to-blue-600' },
-  { name: 'HTML5', icon: '🌐', color: 'from-orange-400 to-orange-600' },
-  { name: 'C#', icon: '#️⃣', color: 'from-blue-100 to-blue-300' },
-  { name: 'CSS3', icon: '🎨', color: 'from-blue-400 to-blue-600' },
-  { name: 'Python', icon: '🐍', color: 'from-green-400 to-green-600' },
-  { name: 'SQL / MySQL', icon: '🐬', color: 'from-yellow-400 to-yellow-600' },
+  {
+    name: 'JavaScript',
+    icon: `${ICON}/javascript/javascript-original.svg`,
+    color: 'from-yellow-400 to-yellow-600',
+  },
+  {
+    name: 'TypeScript',
+    icon: `${ICON}/typescript/typescript-original.svg`,
+    color: 'from-blue-400 to-blue-600',
+  },
+  {
+    name: 'HTML5',
+    icon: `${ICON}/html5/html5-original.svg`,
+    color: 'from-orange-400 to-orange-600',
+  },
+  {
+    name: 'C#',
+    icon: `${ICON}/csharp/csharp-original.svg`,
+    color: 'from-purple-400 to-purple-600',
+  },
+  {
+    name: 'CSS3',
+    icon: `${ICON}/css3/css3-original.svg`,
+    color: 'from-blue-400 to-blue-600',
+  },
+  {
+    name: 'Python',
+    icon: `${ICON}/python/python-original.svg`,
+    color: 'from-green-400 to-yellow-500',
+  },
+  {
+    name: 'SQL / MySQL',
+    icon: `${ICON}/mysql/mysql-original.svg`,
+    color: 'from-orange-400 to-blue-500',
+  },
 ];
 
+// --- Frameworks y librerías ---
 const frameworks = [
-  { name: 'Astro', icon: '🚀', color: 'from-purple-400 to-purple-600' },
-  { name: 'React.js', icon: '⚛️', color: 'from-cyan-400 to-cyan-600' },
-  { name: 'Vue.js', icon: '💚', color: 'from-emerald-400 to-emerald-600' },
-  { name: 'Tailwind CSS', icon: '🎯', color: 'from-teal-400 to-teal-600' },
-  { name: 'ASP.NET', icon: '🌐', color: 'from-black to-gray-800' },
-  { name: 'Django', icon: '🎸', color: 'from-green-600 to-green-800' },
-  { name: 'FastAPI', icon: '⚡', color: 'from-teal-500 to-teal-700' },
-  { name: 'jQuery', icon: '🖥️', color: 'from-yellow-100 to-yellow-400' }
+  {
+    name: 'Astro',
+    icon: `${ICON}/astro/astro-original.svg`,
+    color: 'from-purple-400 to-purple-600',
+  },
+  {
+    name: 'React.js',
+    icon: `${ICON}/react/react-original.svg`,
+    color: 'from-cyan-400 to-cyan-600',
+  },
+  {
+    name: 'Vue.js',
+    icon: `${ICON}/vuejs/vuejs-original.svg`,
+    color: 'from-emerald-400 to-emerald-600',
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: `${ICON}/tailwindcss/tailwindcss-original.svg`,
+    color: 'from-teal-400 to-teal-600',
+  },
+  {
+    name: 'ASP.NET',
+    icon: `${ICON}/dotnetcore/dotnetcore-original.svg`,
+    color: 'from-violet-400 to-violet-600',
+  },
+  {
+    name: 'Django',
+    icon: `${ICON}/django/django-plain.svg`,
+    color: 'from-green-600 to-green-800',
+  },
+  {
+    name: 'FastAPI',
+    icon: `${ICON}/fastapi/fastapi-original.svg`,
+    color: 'from-teal-500 to-teal-700',
+  },
+  {
+    name: 'jQuery',
+    icon: `${ICON}/jquery/jquery-original.svg`,
+    color: 'from-blue-400 to-blue-600',
+  },
 ];
 
+// Traducciones de los títulos de sección
+const TEXT = {
+  es: {
+    title:    'Habilidades',
+    subtitle: 'Tecnologías que utilizo en mis proyectos',
+    langsCat: 'Lenguajes de Programación',
+    fwCat:    'Frameworks y Librerías',
+  },
+  en: {
+    title:    'Skills',
+    subtitle: 'Technologies I use in my projects',
+    langsCat: 'Programming Languages',
+    fwCat:    'Frameworks & Libraries',
+  },
+};
+
+// --- Componente de tarjeta individual de habilidad ---
+// Recibe un objeto skill (con name, icon, color) y su índice para el delay de animación
 function SkillCard({ skill, index }) {
   return (
     <div
       className="group relative p-6 rounded-2xl border border-white/10 
-                 backdrop-blur-sm transition-all duration-500 cursor-pointer
+                 backdrop-blur-sm transition-all duration-500 cursor-default
                  hover:scale-105 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20
                  opacity-0 animate-fadeInUp"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      {/* Fondo gradiente animado */}
+      {/* Fondo gradiente que aparece suavemente al hacer hover */}
       <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} 
                       opacity-0 rounded-2xl transition-opacity duration-500 
                       group-hover:opacity-10`}>
       </div>
 
-      {/* Contenido */}
+      {/* Contenido: ícono SVG + nombre */}
       <div className="relative z-10 text-center">
-        <div className="text-5xl mb-3 transition-transform duration-300 group-hover:scale-125">
-          {skill.icon}
-        </div>
+        {/* 
+          Ícono SVG oficial de la tecnología.
+          - w-12 h-12 → tamaño consistente entre todos los íconos
+          - object-contain → mantiene proporciones sin recortar
+          - Django usa ícono monocromático; en light mode puede verse tenue,
+            pero el efecto glassmorphic del fondo lo contrasta bien
+        */}
+        <img
+          src={skill.icon}
+          alt={`Ícono de ${skill.name}`}
+          className="w-12 h-12 mx-auto mb-3 object-contain
+                     transition-transform duration-300 group-hover:scale-125"
+          loading="lazy"
+        />
         <h3 className="font-display font-bold text-lg text-white">
           {skill.name}
         </h3>
       </div>
 
-      {/* Shine effect */}
+      {/* Efecto de brillo al hover */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-r 
                       from-transparent via-white/10 to-transparent 
                       opacity-0 group-hover:opacity-100 
@@ -57,30 +159,42 @@ function SkillCard({ skill, index }) {
 }
 
 export default function Skills() {
+  const [lang, setLang] = useState('es');
+
+  useEffect(() => {
+    // Leer idioma guardado al montar
+    const savedLang = localStorage.getItem('lang') || 'es';
+    setLang(savedLang);
+
+    // Escuchar cambios de idioma desde Navigation.jsx
+    const handleLangChange = (e) => setLang(e.detail);
+    window.addEventListener('langChange', handleLangChange);
+    return () => window.removeEventListener('langChange', handleLangChange);
+  }, []);
+
+  const t = TEXT[lang];
+
   return (
     <section className="min-h-screen py-20 px-6 relative overflow-hidden">
-      
-      {/* Fondo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/95 to-dark"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         
-        {/* Título */}
+        {/* Título de sección */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Habilidades
+              {t.title}
             </span>
           </h2>
           <p className="text-white/60 text-lg">
-            Tecnologías que utilizo en mis proyectos
+            {t.subtitle}
           </p>
         </div>
 
-        {/* Lenguajes */}
+        {/* Categoría: Lenguajes */}
         <div className="mb-16">
           <h3 className="text-2xl font-display font-bold mb-8 text-primary">
-            💻 Lenguajes de Programación
+            {t.langsCat}
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {languages.map((lang, index) => (
@@ -89,14 +203,14 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* Frameworks */}
+        {/* Categoría: Frameworks y librerías */}
         <div>
           <h3 className="text-2xl font-display font-bold mb-8 text-accent">
-            🛠️ Frameworks y Librerías
+            {t.fwCat}
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {frameworks.map((framework, index) => (
-              <SkillCard key={framework.name} skill={framework} index={index} />
+            {frameworks.map((fw, index) => (
+              <SkillCard key={fw.name} skill={fw} index={index} />
             ))}
           </div>
         </div>

@@ -64,3 +64,134 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #0284C7;
 }
+
+/* =============================================
+   ANIMACIONES DE FORMAS FLOTANTES
+   Tres variantes distintas para que cada burbuja
+   se mueva de forma diferente → movimiento orgánico
+   ============================================= */
+
+@keyframes floatShape1 {
+  0%,  100% { transform: translate(0,    0)    scale(1);    }
+  25%        { transform: translate(20px, -40px) scale(1.04); }
+  50%        { transform: translate(40px,  10px) scale(0.97); }
+  75%        { transform: translate(-15px,-20px) scale(1.02); }
+}
+
+@keyframes floatShape2 {
+  0%,  100% { transform: translate(0,     0)    scale(1);    }
+  30%        { transform: translate(-30px, 25px) scale(1.06); }
+  60%        { transform: translate( 20px,-35px) scale(0.96); }
+  80%        { transform: translate(-10px, 15px) scale(1.03); }
+}
+
+@keyframes floatShape3 {
+  0%,  100% { transform: translate(0,    0)    scale(1);    }
+  20%        { transform: translate(35px, 20px) scale(0.98); }
+  50%        { transform: translate(-25px,-30px) scale(1.05); }
+  80%        { transform: translate( 15px, 25px) scale(0.97); }
+}
+
+/* =============================================
+   TEMA CLARO — Light Mode
+   Se activa cuando el elemento <html> tiene
+   la clase "light" (añadida por Navigation.jsx
+   y persistida en localStorage).
+   ============================================= */
+
+/* Transición suave al cambiar entre temas para
+   que el cambio no sea brusco */
+html, body {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Fondo principal del documento */
+html {
+  background-color: #0F172A; /* mismo que var(dark) */
+}
+html.light {
+  background-color: #EFF3F8;
+}
+
+/* Color de texto base del body */
+html.light body {
+  color: #0F172A;
+}
+
+/* --- Fondos oscuros → fondos claros --- */
+html.light .bg-dark {
+  background-color: #EFF3F8 !important;
+}
+html.light .bg-dark\/80 {
+  background-color: rgba(239, 243, 248, 0.92) !important;
+}
+html.light .bg-dark\/95 {
+  background-color: rgba(239, 243, 248, 0.95) !important;
+}
+html.light .bg-dark\/98 {
+  background-color: rgba(239, 243, 248, 0.98) !important;
+}
+
+/* --- Gradientes de sección (variables de Tailwind) --- */
+html.light .from-dark {
+  --tw-gradient-from: #EFF3F8 var(--tw-gradient-from-position) !important;
+}
+html.light .to-dark {
+  --tw-gradient-to: #EFF3F8 var(--tw-gradient-to-position) !important;
+}
+html.light .via-dark\/95 {
+  --tw-gradient-via: rgba(239,243,248,0.95) var(--tw-gradient-via-position) !important;
+}
+html.light .via-dark\/98 {
+  --tw-gradient-via: rgba(239,243,248,0.98) var(--tw-gradient-via-position) !important;
+}
+
+/* --- Texto blanco → texto oscuro --- */
+html.light .text-white {
+  color: #0F172A !important;
+}
+html.light .text-white\/80 {
+  color: rgba(15, 23, 42, 0.80) !important;
+}
+html.light .text-white\/70 {
+  color: rgba(15, 23, 42, 0.70) !important;
+}
+html.light .text-white\/60 {
+  color: rgba(15, 23, 42, 0.60) !important;
+}
+html.light .text-white\/40 {
+  color: rgba(15, 23, 42, 0.40) !important;
+}
+html.light .text-white\/20 {
+  color: rgba(15, 23, 42, 0.20) !important;
+}
+
+/* --- Superficies glassmorphism → versión oscura sobre fondo claro --- */
+html.light .bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+html.light .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.07) !important;
+}
+
+/* --- Bordes --- */
+html.light .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+html.light .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.20) !important;
+}
+
+/* --- Gradient text en el Hero: from-white se vuelve oscuro
+      para que el texto sea legible sobre fondo claro --- */
+html.light .from-white {
+  --tw-gradient-from: #1e293b var(--tw-gradient-from-position) !important;
+}
+
+/* --- Scrollbar en modo claro --- */
+html.light ::-webkit-scrollbar-track {
+  background: #EFF3F8;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #0EA5E9;
+}

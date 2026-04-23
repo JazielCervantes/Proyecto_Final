@@ -1,47 +1,48 @@
-# Proyecto Final - Desarrollo Web
+# Portafolio Personal — v2.0.0
 
-## Descripción General
-Este proyecto representa el trabajo final del curso de Desarrollo Web, integrando conceptos fundamentales y avanzados de desarrollo web moderno.
+Portafolio de **Jaziel Cervantes** (Tijuana, México). Stack moderno: **Astro 5 + React 18 + Tailwind 3**.
 
-## Objetivo
-Desarrollar una aplicación web funcional que demuestre el dominio de tecnologías frontend, backend y buenas prácticas de desarrollo.
+## v2.0.0 — Changelog
 
-## Características Principales
-- Interfaz responsiva y amigable al usuario
-- Arquitectura escalable y mantenible
-- Integración de base de datos
-- Validación de datos en cliente y servidor
-- Autenticación y autorización de usuarios (si aplica)
+### 🎨 Mejoras
+- **Interfaz rediseñada**: glassmorphism, gradients, animaciones suaves
+- **Design system consolidado**: paleta de colores, tipografía coherente, tokens reutilizables
+- **Componentes optimizados**: React con estado local, hidratación eficiente
+- **Performance**: SSG puro, sin servidores innecesarios
 
-## Tecnologías Utilizadas
-- **Frontend**: HTML5, CSS3, JavaScript, Astro, React
-- **Herramientas**: Git, Vercel
+### 🛠️ Método
+Refactorización guiada por **Shape-Driven Development (SDD)** con especialización en diseño y código limpio, utilizando skills de UI/UX y componentes production-grade.
 
-## Estructura del Proyecto
-```
-Proyecto_Final/
-├── .astro
-├── public
-├── src/
-    ├── components
-    ├── layouts
-    ├── pages
-    ├── styles
+## Características
+- Portafolio responsivo con diseño moderno
+- Componentes React interactivos (`client:load`)
+- Animaciones y efectos visuales pulidos
+- Arquitectura mantenible y escalable
+
+## Quick Start
+
+```bash
+npm run dev      # Dev server → localhost:4321
+npm run build    # Build estático
+npm run preview  # Vista previa
 ```
 
-## Cómo Usar
-1. Clonar o descargar el repositorio
-2. Instalar dependencias 
-3. Ejecutar la aplicación en un servidor local
-4. Acceder a través del navegador web
+## Estructura
+```
+src/
+├── pages/         # Rutas (file-based routing)
+├── components/    # Componentes React
+├── layouts/       # Template global
+└── styles/        # Animaciones y utilidades globales
+```
 
+## Convenciones Clave
+- **Componentes React**: con `client:load` para hidratación
+- **Datos**: hardcodeados en componentes (sin CMS externo)
+- **Tipado**: TypeScript en `.astro`, sin tipos obligatorios en `.jsx`
 
-## Contribuciones
-Este es un proyecto académico. Para mejoras o correcciones, contactar al desarrollador.
-
-## Licencia
-Abierta
 
 ---
-**Desarrollado por**: Jaziel Cervantes
-**Fecha**: 2026
+
+**Desarrollado por**: Jaziel Cervantes | Tijuana, México
+**Versión**: 2.0.0 (2026)

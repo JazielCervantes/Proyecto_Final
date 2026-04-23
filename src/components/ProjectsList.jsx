@@ -1,105 +1,219 @@
-import { useState } from 'react';
+// ProjectsList.jsx
+// Grid de proyectos con animación de entrada (IntersectionObserver pattern).
+// Cada tarjeta enlaza al repositorio de GitHub del proyecto.
+// Soporta cambio de idioma ES/EN para títulos y descripciones.
 
-export default function ProjectsList() {
-  const [hoveredProject, setHoveredProject] = useState(null);
-  const [animatedProjects, setAnimatedProjects] = useState(new Set());
-  
-  const projects = [
+import { useState, useEffect } from 'react';
+
+// Datos de proyectos en ambos idiomas.
+// Las tecnologías no se traducen (son nombres propios).
+const PROJECTS = {
+  es: [
     {
       id: 1,
-      title: 'Portafolio Personal 👨🏽‍💻',
+      title: 'Portafolio Personal',
       description: 'Portafolio personal como Desarrollador Web, en el que se visualiza una breve descripción, proyectos y medio de contacto.',
       technologies: ['Astro', 'Tailwind CSS', 'React'],
       githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
       image: '/images/project1.jpg',
-      color: 'from-teal-500 to-cyan-500'
+      color: 'from-teal-500 to-cyan-500',
     },
     {
       id: 2,
-      title: 'Data Dashboard 📊',
-      description: 'Aplicación web fullstack desarrollada con Django (backend) y React (frontend) que permite visualizar datos almacenados en MySQL a través de una API REST.',
-      technologies: ['Python','JavaScript', 'CSS', 'React'],
+      title: 'Data Dashboard',
+      description: 'Aplicación web fullstack con Django (backend) y React (frontend) que visualiza datos de MySQL a través de una API REST.',
+      technologies: ['Python', 'JavaScript', 'CSS', 'React'],
       githubUrl: 'https://github.com/JazielCervantes/Data_dashboard',
       image: '/images/project2.jpg',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
     },
     {
       id: 3,
-      title: 'API REST Profesional con JWT + Roles 🚀',
-      description: 'API REST completa con autenticación JWT, sistema de roles, y todas las características de una aplicación profesional.',
+      title: 'API REST Profesional con JWT + Roles',
+      description: 'API REST completa con autenticación JWT, sistema de roles y todas las características de una aplicación profesional.',
       technologies: ['Astro', 'Python', 'JavaScript', 'HTML', 'Tailwind CSS'],
       githubUrl: 'https://github.com/JazielCervantes/JWT_API_Proyecto.git',
       image: '/images/project3.jpg',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
     },
     {
       id: 4,
-      title: 'CRUD',
-      description: 'CRUD completo que gestiona información ingresada por el usuario (nombre, teléfono y correo electrónico). Permite crear, almacenar, editar y eliminar utilizando métodos POST, GET, PUT y DELETE mediante procesos almacenados en MySQL.',
+      title: 'CRUD Completo',
+      description: 'CRUD que gestiona información de usuarios (nombre, teléfono, correo). Permite crear, leer, editar y eliminar datos usando métodos REST y procedimientos almacenados en MySQL.',
       technologies: ['Astro', 'Django', 'Python', 'MySQL'],
       githubUrl: 'https://github.com/JazielCervantes/CRUD_ASTRO_DJANGO_MySQL',
       image: '/images/project4.jpg',
-      color: 'from-indigo-500 to-purple-500'
+      color: 'from-indigo-500 to-purple-500',
     },
     {
       id: 5,
-      title: 'Sistema de Ticket de Compra 🛒',
-      description: 'Sistema completo de generación de tickets de compra con búsqueda de productos, cálculo de descuentos y carrito de compras.',
+      title: 'Sistema de Ticket de Compra',
+      description: 'Sistema completo de generación de tickets con búsqueda de productos, cálculo de descuentos y carrito de compras.',
       technologies: ['JavaScript', 'CSS', 'HTML'],
       githubUrl: 'https://github.com/JazielCervantes/Ejercicio_condicionales.git',
       image: '/images/project5.jpg',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
     },
     {
       id: 6,
-      title: 'Conexión API pública con diferentes métodos',
-      description: 'Introducción práctica al uso de Axios, Fetch y jQuery en la programación web.',
+      title: 'Conexión API Pública — Múltiples Métodos',
+      description: 'Introducción práctica al uso de Axios, Fetch y jQuery para consumir APIs públicas en la web.',
       technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
       githubUrl: 'https://github.com/JazielCervantes/Ejercicio_semanal_11',
       image: '/images/project6.jpg',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
     },
     {
       id: 7,
-      title: 'Conexión API pública usando patrón MVC.',
-      description: 'Proyecto enfocado en el uso del patrón Modelo-Vista-Controlador (MVC) para crear una aplicación web que consulte y muestre información sobre usuarios utilizando la API pública JSONPlaceholder.',
+      title: 'API Pública con Patrón MVC',
+      description: 'Aplicación web que consulta y muestra usuarios de JSONPlaceholder siguiendo el patrón Modelo-Vista-Controlador.',
       technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
       githubUrl: 'https://github.com/JazielCervantes/Caso_practico_modulo6',
       image: '/images/project7.jpg',
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
     },
     {
       id: 8,
       title: 'Calculadora Virtual',
-      description: 'Proyecto simple de una calculadora virtual donde, como desarrollador, practicas la manipulación del DOM y la gestión de eventos.',
+      description: 'Calculadora que practica la manipulación del DOM y la gestión de eventos en JavaScript.',
       technologies: ['JavaScript', 'CSS', 'HTML'],
       githubUrl: 'https://calculadora-virtual-mu.vercel.app/',
       image: '/images/project8.jpg',
-      color: 'from-blue-500 to-cyan-500'
-    }
-  ];
+      color: 'from-blue-500 to-cyan-500',
+    },
+  ],
+  en: [
+    {
+      id: 1,
+      title: 'Personal Portfolio',
+      description: 'Personal portfolio as a Web Developer, showcasing a brief introduction, projects, and contact information.',
+      technologies: ['Astro', 'Tailwind CSS', 'React'],
+      githubUrl: 'https://github.com/JazielCervantes/Proyecto_Final',
+      image: '/images/project1.jpg',
+      color: 'from-teal-500 to-cyan-500',
+    },
+    {
+      id: 2,
+      title: 'Data Dashboard',
+      description: 'Fullstack web app with Django (backend) and React (frontend) that visualizes MySQL data through a REST API.',
+      technologies: ['Python', 'JavaScript', 'CSS', 'React'],
+      githubUrl: 'https://github.com/JazielCervantes/Data_dashboard',
+      image: '/images/project2.jpg',
+      color: 'from-green-500 to-emerald-500',
+    },
+    {
+      id: 3,
+      title: 'Professional REST API with JWT + Roles',
+      description: 'Full-featured REST API with JWT authentication, role-based access control and all the characteristics of a production application.',
+      technologies: ['Astro', 'Python', 'JavaScript', 'HTML', 'Tailwind CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/JWT_API_Proyecto.git',
+      image: '/images/project3.jpg',
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
+      id: 4,
+      title: 'Full CRUD App',
+      description: 'CRUD that manages user records (name, phone, email). Supports create, read, update and delete operations via REST and MySQL stored procedures.',
+      technologies: ['Astro', 'Django', 'Python', 'MySQL'],
+      githubUrl: 'https://github.com/JazielCervantes/CRUD_ASTRO_DJANGO_MySQL',
+      image: '/images/project4.jpg',
+      color: 'from-indigo-500 to-purple-500',
+    },
+    {
+      id: 5,
+      title: 'Shopping Cart Ticket System',
+      description: 'Complete ticket generation system with product search, discount calculation and a shopping cart.',
+      technologies: ['JavaScript', 'CSS', 'HTML'],
+      githubUrl: 'https://github.com/JazielCervantes/Ejercicio_condicionales.git',
+      image: '/images/project5.jpg',
+      color: 'from-blue-500 to-cyan-500',
+    },
+    {
+      id: 6,
+      title: 'Public API — Multiple Methods',
+      description: 'Hands-on introduction to Axios, Fetch and jQuery for consuming public APIs on the web.',
+      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/Ejercicio_semanal_11',
+      image: '/images/project6.jpg',
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
+      id: 7,
+      title: 'Public API with MVC Pattern',
+      description: 'Web app that fetches and displays JSONPlaceholder users following the Model-View-Controller pattern.',
+      technologies: ['jQuery', 'JavaScript', 'HTML', 'CSS'],
+      githubUrl: 'https://github.com/JazielCervantes/Caso_practico_modulo6',
+      image: '/images/project7.jpg',
+      color: 'from-orange-500 to-red-500',
+    },
+    {
+      id: 8,
+      title: 'Virtual Calculator',
+      description: 'Calculator project that practices DOM manipulation and event handling in JavaScript.',
+      technologies: ['JavaScript', 'CSS', 'HTML'],
+      githubUrl: 'https://calculadora-virtual-mu.vercel.app/',
+      image: '/images/project8.jpg',
+      color: 'from-blue-500 to-cyan-500',
+    },
+  ],
+};
+
+// Traducciones de textos de la sección
+const TEXT = {
+  es: {
+    title:    'Mis Proyectos',
+    subtitle: 'Explora los proyectos en los que he trabajado. Haz clic en cualquiera para ver el código en GitHub.',
+    ctaText:  '¿Quieres ver más? Visita mi perfil de GitHub',
+    ctaBtn:   'Ver perfil completo',
+    viewGH:   'Ver en GitHub',
+  },
+  en: {
+    title:    'My Projects',
+    subtitle: 'Explore the projects I have worked on. Click any card to view the code on GitHub.',
+    ctaText:  'Want to see more? Visit my GitHub profile',
+    ctaBtn:   'View full profile',
+    viewGH:   'View on GitHub',
+  },
+};
+
+export default function ProjectsList() {
+  const [hoveredProject,   setHoveredProject]   = useState(null);
+  // animatedProjects rastrea qué cards ya terminaron su animación de entrada
+  const [animatedProjects, setAnimatedProjects] = useState(new Set());
+  const [lang,             setLang]             = useState('es');
+
+  useEffect(() => {
+    // Idioma guardado
+    const savedLang = localStorage.getItem('lang') || 'es';
+    setLang(savedLang);
+
+    // Escuchar cambios desde Navigation.jsx
+    const handleLangChange = (e) => setLang(e.detail);
+    window.addEventListener('langChange', handleLangChange);
+    return () => window.removeEventListener('langChange', handleLangChange);
+  }, []);
+
+  const t        = TEXT[lang];
+  const projects = PROJECTS[lang];
 
   return (
     <section className="min-h-screen py-20 px-6 relative">
       
-      {/* Fondo decorativo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/98 to-dark"></div>
-      
       <div className="relative z-10 max-w-7xl mx-auto">
         
-        {/* Encabezado */}
+        {/* Encabezado de la página */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Mis Proyectos
+              {t.title}
             </span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Explora los proyectos en los que he trabajado. Haz clic en cualquiera para ver el código en GitHub.
+            {t.subtitle}
           </p>
         </div>
 
-        {/* Grid de proyectos */}
+        {/* Grid de tarjetas de proyectos */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <a
@@ -109,6 +223,8 @@ export default function ProjectsList() {
               rel="noopener noreferrer"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
+              // Cuando la animación de entrada termina, marcamos la card como "animada"
+              // para que no vuelva a ejecutarse
               onAnimationEnd={() => {
                 setAnimatedProjects(prev => new Set([...prev, project.id]));
               }}
@@ -119,26 +235,22 @@ export default function ProjectsList() {
                 ${!animatedProjects.has(project.id) ? 'opacity-0' : 'opacity-100'}
               `}
               style={{
-                animation: !animatedProjects.has(project.id) 
-                  ? `fadeInUp 0.6s ease-out ${index * 0.1}s forwards` 
+                animation: !animatedProjects.has(project.id)
+                  ? `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`
                   : 'none',
               }}
             >
-              
               {/* Imagen del proyecto */}
               <div className="relative h-48 overflow-hidden">
-                
-                {/* Imagen real */}
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-
-                {/* Overlay degradado */}
+                {/* Overlay de color del proyecto */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`}></div>
                 
-                {/* Ícono de GitHub */}
+                {/* Ícono de GitHub que aparece al hover */}
                 <div className="absolute top-4 right-4 bg-dark/80 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -146,7 +258,7 @@ export default function ProjectsList() {
                 </div>
               </div>
 
-              {/* Contenido */}
+              {/* Contenido de la tarjeta */}
               <div className="p-6 space-y-4">
                 <h3 className="text-2xl font-display font-bold text-white group-hover:text-primary transition-colors">
                   {project.title}
@@ -156,7 +268,7 @@ export default function ProjectsList() {
                   {project.description}
                 </p>
 
-                {/* Tecnologías */}
+                {/* Badges de tecnologías */}
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
@@ -168,16 +280,16 @@ export default function ProjectsList() {
                   ))}
                 </div>
 
-                {/* Indicador de hover */}
+                {/* Indicador "ver en GitHub" que aparece al hover */}
                 <div className="flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="font-semibold">Ver en GitHub</span>
+                  <span className="font-semibold">{t.viewGH}</span>
                   <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
               </div>
 
-              {/* Efecto de brillo al hover */}
+              {/* Efecto de brillo que barre la tarjeta al hacer hover */}
               {hoveredProject === project.id && (
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shine pointer-events-none"></div>
               )}
@@ -185,10 +297,10 @@ export default function ProjectsList() {
           ))}
         </div>
 
-        {/* Call to action */}
+        {/* Call to action — enlace al perfil de GitHub */}
         <div className="text-center mt-16">
           <p className="text-white/60 mb-6">
-            ¿Quieres ver más? Visita mi perfil de GitHub
+            {t.ctaText}
           </p>
           <a
             href="https://github.com/JazielCervantes"
@@ -199,7 +311,7 @@ export default function ProjectsList() {
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
             </svg>
-            Ver perfil completo
+            {t.ctaBtn}
           </a>
         </div>
       </div>
