@@ -112,6 +112,42 @@ export default function Navigation() {
             </button>
           </div>
 
+          {/* Toggles de idioma y tema visibles en móvil, siempre fuera del menú */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleLang}
+              title={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg
+                         border border-white/10 font-display text-sm font-bold
+                         text-white/70 hover:text-primary hover:border-primary/40
+                         transition-all duration-200"
+            >
+              <span className={lang === 'es' ? 'text-primary' : 'text-white/40'}>ES</span>
+              <span className="text-white/20">/</span>
+              <span className={lang === 'en' ? 'text-primary' : 'text-white/40'}>EN</span>
+            </button>
+            <button
+              onClick={toggleTheme}
+              title={isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+              className="p-1.5 rounded-lg border border-white/10
+                         text-white/70 hover:text-primary hover:border-primary/40
+                         transition-all duration-200"
+            >
+              {isDark
+                ? <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 
+                         17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707
+                         M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                  </svg>
+                : <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                      d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                  </svg>
+              }
+            </button>
+          </div>
+
           {/* Botón de menú en móvil */}
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -134,36 +170,6 @@ export default function Navigation() {
             <a href="/proyectos" className="text-white/80 hover:text-primary transition-colors font-medium">{t.projects}</a>
             <a href="/contacto"  className="text-white/80 hover:text-primary transition-colors font-medium">{t.contact}</a>
 
-            {/* Controles de tema e idioma en una fila dentro del menú móvil */}
-            <div className="flex items-center gap-3 pt-2 border-t border-white/10">
-              <button
-                onClick={toggleLang}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-lg
-                           border border-white/10 font-display text-sm font-bold"
-              >
-                <span className={lang === 'es' ? 'text-primary' : 'text-white/40'}>ES</span>
-                <span className="text-white/20">/</span>
-                <span className={lang === 'en' ? 'text-primary' : 'text-white/40'}>EN</span>
-              </button>
-
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg border border-white/10 text-white/70 hover:text-primary"
-              >
-                {isDark
-                  ? <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 
-                           17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707
-                           M12 8a4 4 0 100 8 4 4 0 000-8z" />
-                    </svg>
-                  : <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                    </svg>
-                }
-              </button>
-            </div>
           </div>
         )}
       </div>

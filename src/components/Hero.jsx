@@ -55,9 +55,9 @@ export default function Hero() {
         
         {/* Imagen Personal — entra desde la izquierda */}
         <div className={`relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-          <div className="relative w-80 h-80 mx-auto">
-            {/* Halo de color animado detrás de la foto */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary via-accent to-primary rounded-full blur-3xl opacity-20 animate-pulse"></div>
+          <div className="relative w-52 h-52 mx-auto">
+            {/* Halo de color detrás de la foto */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary via-accent to-primary rounded-full blur-3xl opacity-20"></div>
             <div className="relative z-10 w-full h-full rounded-full border-4 border-primary/30 shadow-2xl overflow-hidden bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 flex items-center justify-center hover:scale-105 transition-transform duration-500">
               <img 
                 src="/images/perfil.jpg" 
