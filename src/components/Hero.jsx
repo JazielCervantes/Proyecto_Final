@@ -97,13 +97,13 @@ export default function Hero() {
           <div className="flex gap-4 pt-4">
             <a 
               href="/proyectos" 
-              className="px-8 py-3 bg-primary hover:bg-primary/80 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-primary/30"
+              className="px-8 py-3 bg-primary hover:bg-primary/80 rounded-lg font-semibold text-white transition-all hover:scale-105 shadow-lg shadow-primary/30"
             >
               {t.ctaProjects}
             </a>
             <a 
               href="/contacto" 
-              className="px-8 py-3 border-2 border-primary hover:bg-primary/10 rounded-lg font-semibold transition-all hover:scale-105"
+              className="px-8 py-3 border-2 border-primary hover:bg-primary/10 rounded-lg font-semibold text-white transition-all hover:scale-105"
             >
               {t.ctaContact}
             </a>
