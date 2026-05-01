@@ -197,7 +197,7 @@ export default function ProjectsList() {
   const projects = PROJECTS[lang];
 
   return (
-    <section className="min-h-screen py-20 px-6 relative">
+    <section className="min-h-screen pt-24 md:pt-25 pb-20 px-6 relative">
       
       <div className="relative z-10 max-w-7xl mx-auto">
         

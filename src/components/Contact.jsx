@@ -120,7 +120,7 @@ export default function Contact() {
   const t = TEXT[lang];
 
   return (
-    <section className="min-h-screen py-20 px-6 relative flex items-center justify-center">
+    <section className="min-h-screen pt-24 md:pt-25 pb-20 px-6 relative flex items-center justify-center">
       
       {/* Blobs decorativos de color — refuerzan las shapes del fondo */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
