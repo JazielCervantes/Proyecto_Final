@@ -53,8 +53,13 @@ export default function Footer() {
               {t.terms}
             </a>
             <span className="text-white/20">•</span>
-            <a href="#" className="text-white/60 hover:text-white transition-colors duration-300">
-              {t.sitemap}
+            <a 
+            href="/sitemap.xml" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white transition-colors duration-300"
+            >
+            {t.sitemap}
             </a>
           </div>
 
